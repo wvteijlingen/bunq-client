@@ -27,7 +27,7 @@ module Bunq
       Bunq::MonetaryAccountBank.new(@resource, id)
     end
 
-    def monetary_accounts_banks
+    def monetary_account_banks
       Bunq::MonetaryAccountBanks.new(@resource)
     end
 
@@ -35,7 +35,7 @@ module Bunq
       Bunq::MonetaryAccountJoint.new(@resource, id)
     end
 
-    def monetary_accounts_joints
+    def monetary_account_joints
       Bunq::MonetaryAccountJoints.new(@resource)
     end
 
