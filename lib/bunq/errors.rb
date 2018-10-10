@@ -4,11 +4,11 @@ module Bunq
     attr_reader :headers
     attr_reader :body
 
-    def initialize(msg = "Response error", code: nil, headers: nil, body: nil)
+    def initialize(message = nil, code: nil, headers: nil, body: nil)
       @code = code
       @headers = headers || {}
       @body = body
-      super("#{msg}: #{body}")
+      super(message)
     end
 
     # Returns the parsed body if it is a JSON document, nil otherwise.
@@ -22,6 +22,20 @@ module Bunq
     def errors
       json = parsed_body
       json ? json['Error'] : nil
+    end
+
+    def request_id
+      @headers['x-bunq-client-request-id']
+    end
+
+    def response_id
+      @headers['x-bunq-client-response-id']
+    end
+
+    def to_s
+      request_id = request_id || 'nil'
+      response_id = response_id || 'nil'
+      "#{super} - Body: #{body}, request id: #{request_id}, response id: #{response_id}"
     end
   end
 
