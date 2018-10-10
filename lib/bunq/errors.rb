@@ -25,17 +25,17 @@ module Bunq
     end
 
     def request_id
-      @headers['x-bunq-client-request-id']
+      @headers['x-bunq-client-request-id']&.first
     end
 
     def response_id
-      @headers['x-bunq-client-response-id']
+      @headers['x-bunq-client-response-id']&.first
     end
 
     def to_s
-      request_id = request_id || 'nil'
-      response_id = response_id || 'nil'
-      "#{super} - Body: #{body}, request id: #{request_id}, response id: #{response_id}"
+      reqid = request_id || 'nil'
+      resid = response_id || 'nil'
+      "#{super} - Body: #{body}, request id: #{reqid}, response id: #{resid}"
     end
   end
 
