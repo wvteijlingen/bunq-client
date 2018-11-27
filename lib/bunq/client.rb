@@ -151,9 +151,18 @@ module Bunq
       Bunq::UserCompany.new(self, id)
     end
 
+    def user_person(id)
+      Bunq::UserPerson.new(self, id)
+    end
+
     # Returns the +Bunq::AttachmentPublicContent+ represented by the given id
     def attachment_public_content(id)
       with_session { Bunq::AttachmentPublicContent.new(self, id) }
+    end
+
+    # Returns the +Bunq::User+ represented by the +Bunq::Configuration.api_key+
+    def me_as_user
+      with_session { user(current_session_user_id) }
     end
 
     # Returns the +Bunq::UserCompany+ represented by the +Bunq::Configuration.api_key+
@@ -161,9 +170,9 @@ module Bunq
       with_session { user_company(current_session_user_id) }
     end
 
-    # Returns the +Bunq::User+ represented by the +Bunq::Configuration.api_key+
-    def me_as_user
-      with_session { user(current_session_user_id) }
+    # Returns the +Bunq::UserPerson+ represented by the +Bunq::Configuration.api_key+
+    def me_as_user_person
+      with_session { user_person(current_session_user_id) }
     end
 
     def ensure_session!
